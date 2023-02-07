@@ -1,0 +1,31 @@
+{
+  "name": "bugscoder-hompage",
+  "version": "1.0.0",
+  "description": "Aryan's personal website. So don't fuck my code.",
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "prettier": "prettier --write .",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "Aryan Singh",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-config-next": "^13.1.6",
+    "prettier": "^2.8.3"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "framer-motion": "^9.0.1",
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1"
+  }
+}
