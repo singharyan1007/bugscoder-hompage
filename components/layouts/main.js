@@ -2,6 +2,7 @@ import Head from "next/head";
 import dynamic from 'next/dynamic'
 // import NavBar from '../navbar'
 import {Box,Container} from '@chakra-ui/react'
+import Navbar from "../navbar";
 // import Footer from '../footer'
 
 
@@ -14,6 +15,7 @@ const Main=({children,router})=>{
             <meta name="author" content="Aryan Singh"/>
             <title>Aryan Singh - Hompage</title>
         </Head>
+        <Navbar path={router.asPath}/>
 
         <Container maxW={'container.md'} pt={14}>
             {children}
