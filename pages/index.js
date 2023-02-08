@@ -3,11 +3,15 @@ import {
   Box,
   Heading,
   useColorModeValue,
-  Image
+  Image,
+  Button
 } from '@chakra-ui/react'
+import { BioSection,BioYear } from '../components/bio'
 // import Image from "next/image"
+import NextLink from 'next/link'
 import Section from '../components/section'
 import Paragraph from '../components/paragraph'
+import { ChevronRightIcon } from '@chakra-ui/icons'
 const Page = () => {
   return (
     <Container>
@@ -52,8 +56,40 @@ const Page = () => {
       <Section delay={0.1}>
         <Heading as='h3' variant='section-title'>About</Heading>
         <Paragraph>
-            A 21 year old engineering undergrad trying to learn about web and computers in public. Also ocasionally writes poetries and short stories and is too lazy to write about tech.
+            A 21 year old engineering undergrad trying to learn about web and computers in public. Also ocassionally writes poetries and short stories and is too lazy to write about tech.
             </Paragraph>
+
+            <Box align={'center'} my={4}>
+            <NextLink href='/works'>
+              <Button rightIcon={<ChevronRightIcon/>} colorScheme='purple'>My Personal Projects</Button>
+            </NextLink>
+
+            </Box>
+      </Section>
+
+      <Section delay={0.2}>
+        <Heading as={'h3'} variant='section-title'>
+          Bio
+        </Heading>
+        <BioSection>
+          <BioYear>2001</BioYear>
+          Born in Gorakhpur (U.P), India.
+        </BioSection>
+        <BioSection>
+          <BioYear>2019</BioYear>
+          Completed high-school from Kota, Rajasthan.
+        </BioSection>
+        <BioSection>
+          <BioYear>2020 to present</BioYear>
+          Bachelors in Engineering in the field of Electronics and Communication Engineering @ Sir M Visvesvaraya Institute of Technology, Bengaluru, Karnataka, India.
+        </BioSection>
+      </Section>
+
+      <Section delay={0.4}>
+        <Heading as={'h3'} variant='section-title'>
+        I ♥
+        </Heading>
+        <Paragraph>Art, Music, Poetry, Short Stories, Photography, Robots, Anime.</Paragraph>
       </Section>
     </Container>
   )
