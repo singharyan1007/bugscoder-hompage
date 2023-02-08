@@ -4,16 +4,24 @@ import {
   Heading,
   useColorModeValue,
   Image,
-  Button
+  Button,
+  List,
+  ListItem,
+  Link
 } from '@chakra-ui/react'
 import { BioSection,BioYear } from '../components/bio'
 // import Image from "next/image"
 import NextLink from 'next/link'
+import Layout from '../components/layouts/article'
 import Section from '../components/section'
 import Paragraph from '../components/paragraph'
 import { ChevronRightIcon } from '@chakra-ui/icons'
+import { IoLogoTwitter, IoLogoInstagram, IoLogoGithub } from 'react-icons/io5'
 const Page = () => {
   return (
+    <Layout>
+
+    
     <Container>
       <Box
         borderRadius={'lg'}
@@ -89,9 +97,52 @@ const Page = () => {
         <Heading as={'h3'} variant='section-title'>
         I ♥
         </Heading>
-        <Paragraph>Art, Music, Poetry, Short Stories, Photography, Robots, Anime.</Paragraph>
+        <Paragraph>Art, Music, Poetry, {' '}
+        <Link href='https://singharyan1007.blogspot.com/'>
+        Short Stories
+        </Link>
+            ,Photography, Robots,
+            <Link href='https://kitsu.io/'>Anime</Link>
+             </Paragraph>
+      </Section>
+      <Section delay={0.2}>
+        <Heading as='h3' variant='section-title'>
+          On the Web
+        </Heading>
+        <List>
+          <ListItem>
+            <Link href='https://github.com/singharyan1007' target='_blank'>
+              <Button variant={'ghost'} colorScheme='purple' leftIcon={<IoLogoGithub/>}>@singharyan1007</Button>
+            </Link>
+          </ListItem>
+
+          <ListItem>
+            <Link href="https://twitter.com/singharyan1007" target="_blank">
+              <Button
+                variant="ghost"
+                colorScheme="purple"
+                leftIcon={<IoLogoTwitter />}
+              >
+                @singharyan1007
+              </Button>
+            </Link>
+          </ListItem>
+
+          <ListItem>
+            <Link href="https://instagram.com/singharyan1007" target="_blank">
+              <Button
+                variant="ghost"
+                colorScheme="purple"
+                leftIcon={<IoLogoInstagram />}
+              >
+                @singharyan1007
+              </Button>
+            </Link>
+          </ListItem>
+        </List>
       </Section>
     </Container>
+    </Layout>
   )
 }
 export default Page
