@@ -3,6 +3,7 @@ import { Box, Spinner } from '@chakra-ui/react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { loadGLTFModel } from '../lib/model'
+import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js'
 
 function easeOutCirc(x) {
   return Math.sqrt(1 - Math.pow(x - 1, 4))
@@ -36,8 +37,76 @@ const ModelComputer = () => {
           antialias: true,
           alpha: true
         })
+        renderer.setPixelRatio(window.devicePixelRatio)
+        renderer.setSize(scW,scH)
+        renderer.outputEncoding=THREE.sRGBEncoding
+        container.appendChild(renderer.domElement)
+        setRenderer(renderer);
+
+
+        const scale=scH*0.005+1.0
+        const camera=new THREE.OrthographicCamera(
+          -scale,
+          scale,
+          scale,
+          -scale,
+          0.01,
+          50000
+        )
+        camera.position.copy(initialCameraPosition)
+        camera.lookAt(target)
+        setCamera(camera)
+
+        const ambientLight=new THREE.AmbientLight(0xcccccc,1)
+        scene.add(ambientLight)
+        const controls=new OrbitControls(camera,renderer.domElement)
+        controls.autoRotate=true
+        controls.target=target
+        setControls(controls)
+
+        loadGLTFModel(scene,'./overwatch.glb',{
+          receiveShadow:false,
+          castShadow:false
+        }).then((gltf)=>{
+          const model=gltf.scene;
+          console.log(model==null);
+          animate();
+          setLoading(false);
+         
+        })
+
+        let req=null;
+        let frame=0;
+        const animate=()=>{
+          req = requestAnimationFrame(animate)
+
+        frame = frame <= 100 ? frame + 1 : frame
+
+        if (frame <= 100) {
+          const p = initialCameraPosition
+          const rotSpeed = -easeOutCirc(frame / 120) * Math.PI * 20
+
+          camera.position.y = 10
+          camera.position.x =
+            p.x * Math.cos(rotSpeed) + p.z * Math.sin(rotSpeed)
+          camera.position.z =
+            p.z * Math.cos(rotSpeed) - p.x * Math.sin(rotSpeed)
+          camera.lookAt(target)
+        } else {
+          controls.update()
+        }
+
+        renderer.render(scene, camera)
+        }
+
+        return ()=>{
+          cancelAnimationFrame(req)
+          renderer.domElement.remove()
+          renderer.dispose()
+        }
+
     }
-  })
+  },[])
   return (
     <Box
       ref={refContainer}
